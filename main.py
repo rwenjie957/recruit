@@ -11,7 +11,7 @@ console_handler = logging.StreamHandler()
 console_handler.setLevel(logging.DEBUG)
 console_handler.setFormatter(formatter)
 
-file_handler = logging.FileHandler('log.txt')
+file_handler = logging.FileHandler('log.txt', mode='a', encoding='utf-8')
 file_handler.setLevel(logging.INFO)
 file_handler.setFormatter(formatter)
 
@@ -26,7 +26,8 @@ other_tags = load_templates('data/others')
 member_dataset, tag_dataset = load_dataset('data')
 
 # 立即招募
-while True:
+for i in range(1):
+    start_recruit(other_tags, all_tags, member_dataset, tag_dataset, threshold)
     instant_recruit(other_tags, threshold)
     logger.info('本轮已全部招募完成，开始下一轮招募')
-    start_recruit(other_tags, tag_dataset, member_dataset, threshold)
+

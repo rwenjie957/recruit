@@ -1,6 +1,6 @@
 # 进行图像识别和定位
 # 需要固定窗口分辨率为1920x1080
-from data_utils import *
+from utils.data_utils import *
 import cv2
 from pathlib import Path
 

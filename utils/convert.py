@@ -5,10 +5,12 @@ def convert(member_data, ignore_low_rank=True):
     tag_data = {'高级资深干员':{'高级资深干员':[]}, '非高级资深干员':{'资深干员':[]}}
     if ignore_low_rank:
         min_rank = 3
+        tag_data['非高级资深干员']['新手'] = []
+        tag_data['非高级资深干员']['机械支援'] = []
     else:
         min_rank = 1
     for k,v in member_data.items():
-        if min_rank <= v['rank'] <=5:
+        if min_rank <= v['rank'] <= 5:
             for i in v['tags']:
                 tag_data['非高级资深干员'][i] = tag_data['非高级资深干员'].get(i, []) + [k]
             if v['rank'] == 5:

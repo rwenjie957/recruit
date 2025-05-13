@@ -1,12 +1,11 @@
 import pyautogui as gui
 from time import sleep
 
-from recruit import *
-from recognize import *
+from utils.recruit import *
+from utils.recognize import *
 import logging
 
 
-logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 
@@ -30,7 +29,7 @@ def instant_recruit(others, threshold=0.8):
         logger.debug(f'定位“立刻招募”:{max_val},{max_loc}')
         if max_val:
             gui.click(max_loc)
-            sleep(1)
+            sleep(1.5)
         else:
             break
         max_val, max_loc = locate(others['skip'], threshold)
@@ -38,7 +37,7 @@ def instant_recruit(others, threshold=0.8):
         gui.click(max_loc)
         sleep(3)
         gui.click(max_loc)
-        sleep(1)
+        sleep(0.5)
 
 
 def start_recruit(others, tags, member_database, tag_database, threshold=0.8):
@@ -54,11 +53,12 @@ def start_recruit(others, tags, member_database, tag_database, threshold=0.8):
             logger.debug(f'识别到的标签及位置:{results_recognized}')
 
             tags_recognized = [i for i in results_recognized.keys()]
-            logger.debug(f'识别到的标签有:{tags_recognized}')
+            logger.info(f'识别到的标签有:{tags_recognized}')
 
             valid_results = recruit(tag_database, tags_recognized)
             logger.debug(f'所有有效组合{valid_results}')
             combinations = evaluate(member_database, valid_results)
+            logger.info(f'随机选择的标签:{combinations}')
 
             for t in combinations:
                 gui.click(results_recognized[t][1])
