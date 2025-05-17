@@ -9,7 +9,7 @@ import logging
 logger = logging.getLogger(__name__)
 
 
-def instant_recruit(others, threshold=0.8):
+def instant_recruit(others, threshold=0.8, record=False):
     for i in range(4):
         max_val, max_loc = locate(others['立即招募'], threshold)
         logger.debug(f'定位立刻招募：{max_val},{max_loc}')
@@ -36,6 +36,8 @@ def instant_recruit(others, threshold=0.8):
         logger.debug(f'定位“skip”:{max_val},{max_loc}')
         gui.click(max_loc)
         sleep(3)
+        if record:
+            record_img()
         gui.click(max_loc)
         sleep(0.5)
 

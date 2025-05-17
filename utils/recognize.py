@@ -22,6 +22,8 @@ def recognize_tag(dataset, threshold=0.95):
         if max_val > threshold:
             h, w = v.shape
             results[k] = (max_val, (max_loc[0] + w/2, max_loc[1] + h/2))
+            if k == "高级资深干员":
+                raise "出现高级资深干员，程序自动停止"
 
     return results
 

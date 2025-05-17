@@ -3,6 +3,7 @@ import numpy as np
 from pathlib import Path
 from PIL import ImageGrab
 import json
+import time
 
 
 def load_dataset(path):
@@ -38,5 +39,15 @@ def screenshot():
     return img_cv
 
 
+def record_img():
+    img = ImageGrab.grab()
+    t = time.strftime('%H_%M_%S', time.localtime())
+    img.save('recruit_history/' + t + '.jpeg')
+    return t
+
+
 if __name__ == '__main__':
     fp = Path('../data/others')
+    import os
+    os.chdir('..')
+    record_img()

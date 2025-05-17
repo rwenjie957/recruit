@@ -3,7 +3,7 @@
 from utils.automation import *
 from utils.data_utils import *
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 formatter = logging.Formatter('%(asctime)s %(filename)s:%(message)s', datefmt='%m-%d %H:%M:%S')
 
@@ -28,6 +28,5 @@ member_dataset, tag_dataset = load_dataset('data')
 # 立即招募
 for i in range(1):
     start_recruit(other_tags, all_tags, member_dataset, tag_dataset, threshold)
-    instant_recruit(other_tags, threshold)
-    logger.info('本轮已全部招募完成，开始下一轮招募')
-
+    instant_recruit(other_tags, threshold, record=True)
+    logger.info('本轮已全部招募完成，开始下一轮招募\n')
